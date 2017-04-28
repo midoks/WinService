@@ -34,13 +34,14 @@
             this.project_add = new System.Windows.Forms.Button();
             this.project_del = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_open_dir = new System.Windows.Forms.Button();
+            this.listBox_show = new System.Windows.Forms.ListBox();
             this.button_choose = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_PN = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listProjectBox = new System.Windows.Forms.ListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             this.restart.TabIndex = 2;
             this.restart.Text = "restart";
             this.restart.UseVisualStyleBackColor = true;
+            this.restart.Click += new System.EventHandler(this.restart_Click);
             // 
             // project_add
             // 
@@ -88,6 +90,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_open_dir);
+            this.groupBox1.Controls.Add(this.listBox_show);
             this.groupBox1.Controls.Add(this.button_choose);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.textBox_PN);
@@ -96,10 +100,31 @@
             this.groupBox1.Controls.Add(this.restart);
             this.groupBox1.Location = new System.Drawing.Point(163, 17);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 152);
+            this.groupBox1.Size = new System.Drawing.Size(200, 243);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controller";
+            // 
+            // button_open_dir
+            // 
+            this.button_open_dir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button_open_dir.Location = new System.Drawing.Point(78, 118);
+            this.button_open_dir.Name = "button_open_dir";
+            this.button_open_dir.Size = new System.Drawing.Size(118, 23);
+            this.button_open_dir.TabIndex = 10;
+            this.button_open_dir.Text = "open dir";
+            this.button_open_dir.UseVisualStyleBackColor = true;
+            this.button_open_dir.Click += new System.EventHandler(this.button_open_dir_Click);
+            // 
+            // listBox_show
+            // 
+            this.listBox_show.FormattingEnabled = true;
+            this.listBox_show.ItemHeight = 12;
+            this.listBox_show.Location = new System.Drawing.Point(11, 96);
+            this.listBox_show.Name = "listBox_show";
+            this.listBox_show.Size = new System.Drawing.Size(183, 16);
+            this.listBox_show.TabIndex = 9;
+            this.listBox_show.SelectedIndexChanged += new System.EventHandler(this.listBox_show_SelectedIndexChanged);
             // 
             // button_choose
             // 
@@ -164,22 +189,12 @@
             this.listProjectBox.TabIndex = 5;
             this.listProjectBox.SelectedIndexChanged += new System.EventHandler(this.listProjectBox_SelectedIndexChanged);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(163, 175);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 85);
-            this.groupBox3.TabIndex = 7;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Stauts";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(379, 272);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -204,11 +219,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox listProjectBox;
         private System.Windows.Forms.TextBox textBox_PN;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_choose;
+        private System.Windows.Forms.ListBox listBox_show;
+        private System.Windows.Forms.Button button_open_dir;
 
     }
 }
