@@ -206,8 +206,8 @@ namespace Services
             {
                 System.Diagnostics.Process.Start(dir);
             }
-            else { 
-                MessageBox.Show("文件不存在!");
+            else {
+                MessageBox.Show(dir + "目录不存在!");
             }
         }
 
