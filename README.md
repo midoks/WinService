@@ -6,4 +6,4 @@
 
 ### 截图
 
-[![截图](/images/screen_1.jpg)](/images/screen_1.jpg)
+[![截图](/images/screen_1.png)](/images/screen_1.png)
