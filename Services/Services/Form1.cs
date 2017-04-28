@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Services
 {
@@ -19,6 +20,7 @@ namespace Services
 
             //this.ini = new SystemINI(BaseDir + "service.ini");
             this.iniXml = new SystemXml(BaseDir + "service.xml");
+            CheckForIllegalCrossThreadCalls = false; 
 
             reloadList();
         }
@@ -54,7 +56,18 @@ namespace Services
         public void log(string log)
         {
             Console.WriteLine(DateTime.Now.ToLocalTime().ToString() + "---------------------" + log);
-        } 
+        }
+
+        public void start_bat() {
+            int i = listProjectBox.SelectedIndex;
+            XmlNode ch = this.iniXml.selectedNode(i);
+            if (ch != null)
+            {
+                string v = ch.Attributes["dir"].Value;
+                string cmd_start_bat = getDirPath(v);
+                Wcmd(cmd_start_bat + "/start.bat");
+            }
+        }
 
 
         private void button_start_Click(object sender, EventArgs e)
@@ -75,8 +88,10 @@ namespace Services
                     log(cmd_start_bat + "/start.bat");
                     if (File.Exists(cmd_start_bat + "/start.bat"))
                     {
-
-                        Wcmd(cmd_start_bat + "/start.bat");
+                        Thread t1 = new Thread(new ThreadStart(start_bat));
+                        t1.IsBackground = true;
+                       
+                        t1.Start();
                     }
                     else 
                     {
