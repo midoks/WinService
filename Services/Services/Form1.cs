@@ -75,7 +75,8 @@ namespace Services
                     log(cmd_start_bat + "/start.bat");
                     if (File.Exists(cmd_start_bat + "/start.bat"))
                     {
-                        Wcmd(cmd_start_bat);
+
+                        Wcmd(cmd_start_bat + "/start.bat");
                     }
                     else 
                     {
@@ -93,7 +94,7 @@ namespace Services
                     log(cmd_stop_bat + "/stop.bat");
                     if (File.Exists(cmd_stop_bat + "/stop.bat"))
                     {
-                        Wcmd(cmd_stop_bat);
+                        Wcmd(cmd_stop_bat + "/stop.bat");
                     }
                     else
                     {
@@ -202,6 +203,7 @@ namespace Services
         private void button_open_dir_Click(object sender, EventArgs e)
         {
             string dir = listBox_show.Items[0].ToString();
+            dir = getDirPath(dir);
             if (Directory.Exists(dir))
             {
                 System.Diagnostics.Process.Start(dir);
@@ -219,7 +221,7 @@ namespace Services
             }
             else
             {
-                return BaseDir + "/scripts/" + v;
+                return BaseDir + "scripts/" + v;
             }
         }
 
@@ -255,6 +257,7 @@ namespace Services
         //执行cmd命令
         private void Wcmd(string cmdtext)
         {
+            
             if (isSystemType64())
             {
                 Wcmd64(cmdtext);
@@ -267,6 +270,8 @@ namespace Services
 
         private void Wcmd32(string cmdtext)
         {
+            //log("sssss-----sss");
+            //log(cmdtext + "sssss-----sss");
             Process Tcmd = new Process();
             Tcmd.StartInfo.FileName = "cmd.exe";//设定程序名 
             Tcmd.StartInfo.UseShellExecute = false;//关闭Shell的使用 
@@ -279,8 +284,8 @@ namespace Services
             //Tcmd.StandardInput.WriteLine("exit");
             //Tcmd.WaitForExit();
             Tcmd.Start();//执行VER命令 
-            //string str = Tcmd.StandardOutput.ReadToEnd();
-            //MessageBox.Show(str);
+            string str = Tcmd.StandardOutput.ReadToEnd();
+            log(str);
             Tcmd.Close();
         }
 
@@ -290,13 +295,14 @@ namespace Services
             ProcessStartInfo info = new ProcessStartInfo();
             info.UseShellExecute = false;
             info.CreateNoWindow = true;
-            //info.RedirectStandardError = true;
-            //info.RedirectStandardInput = true;
-            //info.RedirectStandardOutput = true;
-            //info.WorkingDirectory = Environment.CurrentDirectory;
+            info.RedirectStandardError = true;
+            info.RedirectStandardInput = true;
+            info.RedirectStandardOutput = true;
+            info.WorkingDirectory = Environment.CurrentDirectory;
             info.FileName = "cmd.exe";
             info.Arguments = "/c " + cmdtext;
             info.Verb = "runas";
+            
             Process.Start(info);
         }
 
@@ -343,7 +349,7 @@ namespace Services
                     log(cmd_start_bat + "/restart.bat");
                     if (File.Exists(cmd_start_bat + "/restart.bat"))
                     {
-                        Wcmd(cmd_start_bat);
+                        Wcmd(cmd_start_bat + "/restart.bat");
                     }
                     else
                     {
