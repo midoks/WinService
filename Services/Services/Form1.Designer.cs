@@ -28,43 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button_start = new System.Windows.Forms.Button();
-            this.restart = new System.Windows.Forms.Button();
             this.project_add = new System.Windows.Forms.Button();
             this.project_del = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_open_dir = new System.Windows.Forms.Button();
-            this.listBox_show = new System.Windows.Forms.ListBox();
-            this.button_choose = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox_PN = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listProjectBox = new System.Windows.Forms.ListBox();
-            this.groupBox1.SuspendLayout();
+            this.restart = new System.Windows.Forms.Button();
+            this.button_start = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_PN = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button_choose = new System.Windows.Forms.Button();
+            this.listBox_show = new System.Windows.Forms.ListBox();
+            this.button_open_dir = new System.Windows.Forms.Button();
+            this.button_m_icon = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.notifyIcon_main = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip_notify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.close_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.contextMenuStrip_notify.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button_start
-            // 
-            this.button_start.Location = new System.Drawing.Point(76, 30);
-            this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(57, 30);
-            this.button_start.TabIndex = 1;
-            this.button_start.Text = "start";
-            this.button_start.UseVisualStyleBackColor = true;
-            this.button_start.Click += new System.EventHandler(this.button_start_Click);
-            // 
-            // restart
-            // 
-            this.restart.Location = new System.Drawing.Point(137, 30);
-            this.restart.Name = "restart";
-            this.restart.Size = new System.Drawing.Size(59, 30);
-            this.restart.TabIndex = 2;
-            this.restart.Text = "restart";
-            this.restart.UseVisualStyleBackColor = true;
-            this.restart.Click += new System.EventHandler(this.restart_Click);
             // 
             // project_add
             // 
@@ -87,83 +73,6 @@
             this.project_del.Text = " -";
             this.project_del.UseVisualStyleBackColor = true;
             this.project_del.Click += new System.EventHandler(this.project_del_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button_open_dir);
-            this.groupBox1.Controls.Add(this.listBox_show);
-            this.groupBox1.Controls.Add(this.button_choose);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox_PN);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button_start);
-            this.groupBox1.Controls.Add(this.restart);
-            this.groupBox1.Location = new System.Drawing.Point(163, 17);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 243);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Controller";
-            // 
-            // button_open_dir
-            // 
-            this.button_open_dir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_open_dir.Location = new System.Drawing.Point(78, 118);
-            this.button_open_dir.Name = "button_open_dir";
-            this.button_open_dir.Size = new System.Drawing.Size(118, 23);
-            this.button_open_dir.TabIndex = 10;
-            this.button_open_dir.Text = "open dir";
-            this.button_open_dir.UseVisualStyleBackColor = true;
-            this.button_open_dir.Click += new System.EventHandler(this.button_open_dir_Click);
-            // 
-            // listBox_show
-            // 
-            this.listBox_show.FormattingEnabled = true;
-            this.listBox_show.ItemHeight = 12;
-            this.listBox_show.Location = new System.Drawing.Point(11, 96);
-            this.listBox_show.Name = "listBox_show";
-            this.listBox_show.Size = new System.Drawing.Size(183, 16);
-            this.listBox_show.TabIndex = 9;
-            this.listBox_show.SelectedIndexChanged += new System.EventHandler(this.listBox_show_SelectedIndexChanged);
-            // 
-            // button_choose
-            // 
-            this.button_choose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_choose.Location = new System.Drawing.Point(76, 66);
-            this.button_choose.Name = "button_choose";
-            this.button_choose.Size = new System.Drawing.Size(118, 24);
-            this.button_choose.TabIndex = 8;
-            this.button_choose.Text = "choose dir";
-            this.button_choose.UseVisualStyleBackColor = true;
-            this.button_choose.Click += new System.EventHandler(this.button_choose_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(9, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "ProjectName";
-            // 
-            // textBox_PN
-            // 
-            this.textBox_PN.Location = new System.Drawing.Point(9, 35);
-            this.textBox_PN.Name = "textBox_PN";
-            this.textBox_PN.Size = new System.Drawing.Size(63, 21);
-            this.textBox_PN.TabIndex = 6;
-            this.textBox_PN.TextChanged += new System.EventHandler(this.textBox_PN_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(9, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "scrpit dir:";
             // 
             // groupBox2
             // 
@@ -189,6 +98,137 @@
             this.listProjectBox.TabIndex = 5;
             this.listProjectBox.SelectedIndexChanged += new System.EventHandler(this.listProjectBox_SelectedIndexChanged);
             // 
+            // restart
+            // 
+            this.restart.Location = new System.Drawing.Point(137, 30);
+            this.restart.Name = "restart";
+            this.restart.Size = new System.Drawing.Size(59, 30);
+            this.restart.TabIndex = 2;
+            this.restart.Text = "restart";
+            this.restart.UseVisualStyleBackColor = true;
+            this.restart.Click += new System.EventHandler(this.restart_Click);
+            // 
+            // button_start
+            // 
+            this.button_start.Location = new System.Drawing.Point(76, 30);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(57, 30);
+            this.button_start.TabIndex = 1;
+            this.button_start.Text = "start";
+            this.button_start.UseVisualStyleBackColor = true;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(9, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "scrpit dir:";
+            // 
+            // textBox_PN
+            // 
+            this.textBox_PN.Location = new System.Drawing.Point(9, 35);
+            this.textBox_PN.Name = "textBox_PN";
+            this.textBox_PN.Size = new System.Drawing.Size(63, 21);
+            this.textBox_PN.TabIndex = 6;
+            this.textBox_PN.TextChanged += new System.EventHandler(this.textBox_PN_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(9, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "ProjectName";
+            // 
+            // button_choose
+            // 
+            this.button_choose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button_choose.Location = new System.Drawing.Point(76, 66);
+            this.button_choose.Name = "button_choose";
+            this.button_choose.Size = new System.Drawing.Size(118, 24);
+            this.button_choose.TabIndex = 8;
+            this.button_choose.Text = "choose dir";
+            this.button_choose.UseVisualStyleBackColor = true;
+            this.button_choose.Click += new System.EventHandler(this.button_choose_Click);
+            // 
+            // listBox_show
+            // 
+            this.listBox_show.FormattingEnabled = true;
+            this.listBox_show.ItemHeight = 12;
+            this.listBox_show.Location = new System.Drawing.Point(11, 96);
+            this.listBox_show.Name = "listBox_show";
+            this.listBox_show.Size = new System.Drawing.Size(183, 16);
+            this.listBox_show.TabIndex = 9;
+            this.listBox_show.SelectedIndexChanged += new System.EventHandler(this.listBox_show_SelectedIndexChanged);
+            // 
+            // button_open_dir
+            // 
+            this.button_open_dir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button_open_dir.Location = new System.Drawing.Point(78, 118);
+            this.button_open_dir.Name = "button_open_dir";
+            this.button_open_dir.Size = new System.Drawing.Size(118, 23);
+            this.button_open_dir.TabIndex = 10;
+            this.button_open_dir.Text = "open dir";
+            this.button_open_dir.UseVisualStyleBackColor = true;
+            this.button_open_dir.Click += new System.EventHandler(this.button_open_dir_Click);
+            // 
+            // button_m_icon
+            // 
+            this.button_m_icon.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button_m_icon.Location = new System.Drawing.Point(119, 214);
+            this.button_m_icon.Name = "button_m_icon";
+            this.button_m_icon.Size = new System.Drawing.Size(75, 23);
+            this.button_m_icon.TabIndex = 11;
+            this.button_m_icon.Text = "Make Icon";
+            this.button_m_icon.UseVisualStyleBackColor = true;
+            this.button_m_icon.Click += new System.EventHandler(this.button_m_icon_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button_m_icon);
+            this.groupBox1.Controls.Add(this.button_open_dir);
+            this.groupBox1.Controls.Add(this.listBox_show);
+            this.groupBox1.Controls.Add(this.button_choose);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.textBox_PN);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.button_start);
+            this.groupBox1.Controls.Add(this.restart);
+            this.groupBox1.Location = new System.Drawing.Point(163, 17);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 252);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Controller";
+            // 
+            // notifyIcon_main
+            // 
+            this.notifyIcon_main.ContextMenuStrip = this.contextMenuStrip_notify;
+            this.notifyIcon_main.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon_main.Icon")));
+            this.notifyIcon_main.Text = "Services";
+            this.notifyIcon_main.Visible = true;
+            this.notifyIcon_main.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_main_MouseDoubleClick);
+            // 
+            // contextMenuStrip_notify
+            // 
+            this.contextMenuStrip_notify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.close_ToolStripMenuItem});
+            this.contextMenuStrip_notify.Name = "contextMenuStrip_notify";
+            this.contextMenuStrip_notify.Size = new System.Drawing.Size(148, 26);
+            // 
+            // close_ToolStripMenuItem
+            // 
+            this.close_ToolStripMenuItem.Name = "close_ToolStripMenuItem";
+            this.close_ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.close_ToolStripMenuItem.Text = "关闭Services";
+            this.close_ToolStripMenuItem.Click += new System.EventHandler(this.close_ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -203,28 +243,34 @@
             this.Name = "Form1";
             this.Text = "Services";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.contextMenuStrip_notify.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button_start;
-        private System.Windows.Forms.Button restart;
         private System.Windows.Forms.Button project_add;
         private System.Windows.Forms.Button project_del;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listProjectBox;
+        private System.Windows.Forms.Button restart;
+        private System.Windows.Forms.Button button_start;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_PN;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_choose;
         private System.Windows.Forms.ListBox listBox_show;
         private System.Windows.Forms.Button button_open_dir;
+        private System.Windows.Forms.Button button_m_icon;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NotifyIcon notifyIcon_main;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_notify;
+        private System.Windows.Forms.ToolStripMenuItem close_ToolStripMenuItem;
 
     }
 }

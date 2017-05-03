@@ -4,6 +4,9 @@ using System.Xml;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using IWshRuntimeLibrary;
+using System.Collections;
+using System.ComponentModel;
 
 namespace Services
 {
@@ -23,6 +26,20 @@ namespace Services
             CheckForIllegalCrossThreadCalls = false; 
 
             reloadList();
+
+            //拦截标题栏的关闭事件
+            this.Closing += new CancelEventHandler(Form_Closing);
+        }
+
+        private void Form_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // 取消关闭窗体
+            e.Cancel = true;
+
+            // 将窗体变为最小化
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false; //不显示在系统任务栏 
+            notifyIcon_main.Visible = true;
         }
 
         public void reloadList() {
@@ -41,7 +58,7 @@ namespace Services
                 string pn = r.FirstChild.Attributes["name"].Value;
                 string pid_path = BaseDir + "pids/" + pn + ".pid";
 
-                if (File.Exists(pid_path)){
+                if (System.IO.File.Exists(pid_path)){
                     button_start.Text = "stop";
                     textBox_PN.ReadOnly = true;
                 }
@@ -86,7 +103,7 @@ namespace Services
                 {
                     string cmd_start_bat = getDirPath(v);
                     log(cmd_start_bat + "/start.bat");
-                    if (File.Exists(cmd_start_bat + "/start.bat"))
+                    if (System.IO.File.Exists(cmd_start_bat + "/start.bat"))
                     {
                         Thread t1 = new Thread(new ThreadStart(start_bat));
                         t1.IsBackground = true;
@@ -107,7 +124,7 @@ namespace Services
                 {
                     string cmd_stop_bat = getDirPath(v);
                     log(cmd_stop_bat + "/stop.bat");
-                    if (File.Exists(cmd_stop_bat + "/stop.bat"))
+                    if (System.IO.File.Exists(cmd_stop_bat + "/stop.bat"))
                     {
                         Wcmd(cmd_stop_bat + "/stop.bat");
                     }
@@ -116,7 +133,7 @@ namespace Services
                         MessageBox.Show("不存在启动脚本!!!");
                         return;
                     }
-                    File.Delete(pid_path);
+                    System.IO.File.Delete(pid_path);
                     button_start.Text = "start";
                     textBox_PN.ReadOnly = false;
                 }
@@ -182,7 +199,7 @@ namespace Services
 
                 string pid_path = BaseDir + "pids/" + pn + ".pid";
 
-                if (File.Exists(pid_path))
+                if (System.IO.File.Exists(pid_path))
                 {
                     button_start.Text = "stop";
                     textBox_PN.ReadOnly = true;
@@ -357,12 +374,12 @@ namespace Services
 
                 string action_name = button_start.Text;
                 string pid_path = BaseDir + "pids/" + pn + ".pid";
-                if (File.Exists(pid_path))
+                if (System.IO.File.Exists(pid_path))
                 {
 
                     string cmd_start_bat = getDirPath(v);
                     log(cmd_start_bat + "/restart.bat");
-                    if (File.Exists(cmd_start_bat + "/restart.bat"))
+                    if (System.IO.File.Exists(cmd_start_bat + "/restart.bat"))
                     {
                         Wcmd(cmd_start_bat + "/restart.bat");
                     }
@@ -386,6 +403,91 @@ namespace Services
             }
 
 
+        }
+
+        private void button_m_icon_Click(object sender, EventArgs e)
+        {
+            string deskTop = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+            if (System.IO.File.Exists(deskTop + "\\Services.lnk"))  //
+            {
+                System.IO.File.Delete(deskTop + "\\Services.lnk");//删除原来的桌面快捷键方式
+                //return;
+            }
+
+            WshShell shell = new WshShell();
+
+            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\" + "Services.lnk");
+            shortcut.TargetPath = @Application.StartupPath + "\\Services.exe"; //目标文件
+            shortcut.WorkingDirectory = System.Environment.CurrentDirectory;//该属性指定应用程序的工作目录，当用户没有指定一个具体的目录时，快捷方式的目标应用程序将使用该属性所指定的目录来装载或保存文件。
+            shortcut.WindowStyle = 1; //目标应用程序的窗口状态分为普通、最大化、最小化【1,3,7】
+            shortcut.Description = "Services"; //描述
+            //shortcut.IconLocation = Application.StartupPath + "\\app.ico";  //快捷方式图标
+            shortcut.Arguments = "";
+            shortcut.Hotkey = "CTRL+ALT+F10"; // 快捷键
+            shortcut.Save(); //必须调用保存快捷才成创建成功
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (checkedIsHasSelfRun())
+            {
+                MessageBox.Show("已经在运行了!!!");
+                Application.Exit();
+            }
+
+        }
+
+        //检查是自己已经运行了
+        private bool checkedIsHasSelfRun()
+        {
+            string cmdtext = "tasklist | findstr Services.exe";
+            Process Tcmd = new Process();
+            Tcmd.StartInfo.FileName = "cmd.exe";//设定程序名
+            Tcmd.StartInfo.UseShellExecute = false;//关闭Shell的使用 
+            Tcmd.StartInfo.RedirectStandardInput = true;//重定向标准输入 
+            Tcmd.StartInfo.RedirectStandardOutput = true;//重定向标准输出
+            Tcmd.StartInfo.RedirectStandardError = true;//重定向错误输出
+            Tcmd.StartInfo.CreateNoWindow = true;
+            Tcmd.StartInfo.Arguments = "/C " + cmdtext;//设置不显示窗口
+            Tcmd.Start();//执行VER命令 
+
+            string s = Tcmd.StandardOutput.ReadToEnd();
+            Tcmd.Close();
+
+            string[] ss;
+            ArrayList str = new ArrayList();
+            if (s != null)
+            {
+                ss = s.Split('\n');
+                foreach (string d in ss)
+                {
+                    if (d != "")
+                    {
+                        str.Add(d);
+                    }
+                }
+
+                if (str.Count > 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void notifyIcon_main_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+            }
+        }
+
+        private void close_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
       
